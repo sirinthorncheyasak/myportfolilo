@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio ของฉัน</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="site">
+    <header>
+        <nav class="navbar">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a role="menuitem" href="#about">เกี่ยวกับฉัน</a></li>
+                <li role="none"><a role="menuitem" href="#projects">ผลงาน</a></li>
+                <li role="none"><a role="menuitem" href="#skills">ทักษะ</a></li>
+                <li role="none"><a role="menuitem" href="#contact">ติดต่อ</a></li>
+            </ul>
+            <button class="hamburger-menu" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" class="portfolio-section about-me">
+            <h2>เกี่ยวกับฉัน</h2>
+            <p>สวัสดีครับ ผมคือนักพัฒนาที่มีความกระตือรือร้นในการเรียนรู้เทคโนโลยีใหม่ๆ และสร้างเว็บไซต์ที่ใช้งานได้จริง เหมาะกับการใช้งานบนทุกอุปกรณ์</p>
+        </section>
+
+        <section id="projects" class="portfolio-section">
+            <h2>ผลงาน</h2>
+            <div class="projects-controls" role="toolbar" aria-label="Filter projects">
+                <button class="filter-button active" onclick="filterProjects('all')">ทั้งหมด</button>
+                <button class="filter-button" onclick="filterProjects('web')">เว็บ</button>
+                <button class="filter-button" onclick="filterProjects('mobile')">มือถือ</button>
+                <button class="filter-button" onclick="filterProjects('data')">ข้อมูล</button>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card" data-category="web">
+                    <div class="card-media">โปรเจกต์ A (เว็บ)</div>
+                    <div class="card-content">
+                        <h3>โปรเจกต์ A</h3>
+                        <p>เว็บไซต์สำหรับแสดงผลงานที่ตอบสนองได้ และมีระบบจัดการเนื้อหาเบื้องต้น</p>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="window.open('#')">ดูรายละเอียด</button>
+                            <button class="btn btn-ghost" onclick="window.open('#')">ซอร์สโค้ด</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="card-media">โปรเจกต์ B (แอปมือถือ)</div>
+                    <div class="card-content">
+                        <h3>โปรเจกต์ B</h3>
+                        <p>แอปมือถือที่ช่วยจัดการงานประจำวัน มี UI ที่เรียบง่ายและเร็ว</p>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="window.open('#')">ดูรายละเอียด</button>
+                            <button class="btn btn-ghost" onclick="window.open('#')">ซอร์สโค้ด</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="data">
+                    <div class="card-media">โปรเจกต์ C (ข้อมูล)</div>
+                    <div class="card-content">
+                        <h3>โปรเจกต์ C</h3>
+                        <p>แดชบอร์ดข้อมูลที่ดึงข้อมูลจาก API และแสดงผลแบบโต้ตอบ</p>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="window.open('#')">ดูรายละเอียด</button>
+                            <button class="btn btn-ghost" onclick="window.open('#')">ซอร์สโค้ด</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="portfolio-section">
+            <h2>ทักษะ</h2>
+            <ul class="skills-list">
+                <li class="skill-item">HTML/CSS</li>
+                <li class="skill-item">JavaScript</li>
+                <li class="skill-item">React</li>
+                <li class="skill-item">Node.js</li>
+                <li class="skill-item">Database (SQL)</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="portfolio-section">
+            <h2>ติดต่อ</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">ชื่อ:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">อีเมล:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="message">ข้อความ:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit">ส่งข้อความ</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Portfolio ของฉัน</p>
+    </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        (function(){
+            const filterButtons = document.querySelectorAll('.filter-button');
+            window.filterProjects = window.filterProjects || function(category){
+                if (typeof window.filterProjects === 'function') {
+                    try {
+                        window.filterProjectsOriginal && window.filterProjectsOriginal(category);
+                    } catch(e){}
+                }
+            };
+
+            document.querySelectorAll('.projects-controls').forEach(ctrl => {
+                ctrl.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.filter-button');
+                    if (!btn) return;
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    if (typeof window.filterProjects === 'function') {
+                        window.filterProjects(btn.textContent === 'ทั้งหมด' ? 'all' : btn.textContent === 'เว็บ' ? 'web' : btn.textContent === 'มือถือ' ? 'mobile' : 'data');
+                    }
+                });
+            });
+
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+            if (hamburger && navLinks) {
+                function toggleMenu(){
+                    const active = navLinks.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', active ? 'true' : 'false');
+                }
+                hamburger.addEventListener('click', toggleMenu);
+                navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) toggleMenu();
+                }));
+            }
+        })();
+    </script>
+</body>
+</html>
