@@ -24,16 +24,16 @@
     <main>
         <section id="about" class="portfolio-section about-me">
             <h2>เกี่ยวกับฉัน</h2>
-            <p>สวัสดีครับ ผมคือนักพัฒนาที่มีความกระตือรือร้นในการเรียนรู้เทคโนโลยีใหม่ๆ และสร้างเว็บไซต์ที่ใช้งานได้จริง เหมาะกับการใช้งานบนทุกอุปกรณ์</p>
+            <p>My name is sirinthorn cheyasak. </p>
         </section>
 
         <section id="projects" class="portfolio-section">
             <h2>ผลงาน</h2>
             <div class="projects-controls" role="toolbar" aria-label="Filter projects">
-                <button class="filter-button active" onclick="filterProjects('all')">ทั้งหมด</button>
-                <button class="filter-button" onclick="filterProjects('web')">เว็บ</button>
-                <button class="filter-button" onclick="filterProjects('mobile')">มือถือ</button>
-                <button class="filter-button" onclick="filterProjects('data')">ข้อมูล</button>
+                <button class="filter-button active" data-filter="all">ทั้งหมด</button>
+                <button class="filter-button" data-filter="web">เว็บ</button>
+                <button class="filter-button" data-filter="mobile">มือถือ</button>
+                <button class="filter-button" data-filter="data">ข้อมูล</button>
             </div>
 
             <div class="projects-grid">
@@ -43,8 +43,8 @@
                         <h3>โปรเจกต์ A</h3>
                         <p>เว็บไซต์สำหรับแสดงผลงานที่ตอบสนองได้ และมีระบบจัดการเนื้อหาเบื้องต้น</p>
                         <div class="card-actions">
-                            <button class="btn btn-primary" onclick="window.open('#')">ดูรายละเอียด</button>
-                            <button class="btn btn-ghost" onclick="window.open('#')">ซอร์สโค้ด</button>
+                            <button class="btn btn-primary detail-btn" data-title="โปรเจกต์ A" data-desc="เว็บไซต์สำหรับแสดงผลงานที่ตอบสนองได้ และมีระบบจัดการเนื้อหาเบื้องต้น" data-media="โปรเจกต์ A (เว็บ)" data-link="#" data-tooltip="ดูรายละเอียด">ดูรายละเอียด</button>
+                            <button class="btn btn-ghost source-btn" data-source="#" data-tooltip="เปิดซอร์สโค้ด">ซอร์สโค้ด</button>
                         </div>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
                         <h3>โปรเจกต์ B</h3>
                         <p>แอปมือถือที่ช่วยจัดการงานประจำวัน มี UI ที่เรียบง่ายและเร็ว</p>
                         <div class="card-actions">
-                            <button class="btn btn-primary" onclick="window.open('#')">ดูรายละเอียด</button>
-                            <button class="btn btn-ghost" onclick="window.open('#')">ซอร์สโค้ด</button>
+                            <button class="btn btn-primary detail-btn" data-title="โปรเจกต์ B" data-desc="แอปมือถือที่ช่วยจัดการงานประจำวัน มี UI ที่เรียบง่ายและเร็ว" data-media="โปรเจกต์ B (แอปมือถือ)" data-link="#" data-tooltip="ดูรายละเอียด">ดูรายละเอียด</button>
+                            <button class="btn btn-ghost source-btn" data-source="#" data-tooltip="เปิดซอร์สโค้ด">ซอร์สโค้ด</button>
                         </div>
                     </div>
                 </div>
@@ -67,8 +67,8 @@
                         <h3>โปรเจกต์ C</h3>
                         <p>แดชบอร์ดข้อมูลที่ดึงข้อมูลจาก API และแสดงผลแบบโต้ตอบ</p>
                         <div class="card-actions">
-                            <button class="btn btn-primary" onclick="window.open('#')">ดูรายละเอียด</button>
-                            <button class="btn btn-ghost" onclick="window.open('#')">ซอร์สโค้ด</button>
+                            <button class="btn btn-primary detail-btn" data-title="โปรเจกต์ C" data-desc="แดชบอร์ดข้อมูลที่ดึงข้อมูลจาก API และแสดงผลแบบโต้ตอบ" data-media="โปรเจกต์ C (ข้อมูล)" data-link="#" data-tooltip="ดูรายละเอียด">ดูรายละเอียด</button>
+                            <button class="btn btn-ghost source-btn" data-source="#" data-tooltip="เปิดซอร์สโค้ด">ซอร์สโค้ด</button>
                         </div>
                     </div>
                 </div>
@@ -104,6 +104,13 @@
                 <button type="submit">ส่งข้อความ</button>
             </form>
         </section>
+
+        <!-- Dev notes: brief summary of Copilot assistance -->
+        <section id="dev-notes" class="portfolio-section dev-notes" aria-labelledby="dev-notes-title">
+            <h2 id="dev-notes-title">Dev notes</h2>
+            <p>สรุปการช่วยเหลือจาก GitHub Copilot: เพิ่มเอฟเฟกต์โฮเวอร์ การกรองผลงานด้วยปุ่ม การแสดงรายละเอียดในม็อดอล (modal) และทูลทิป เพื่อปรับปรุง UX และการออกแบบโดยรวมให้ดูเป็นมืออาชีพ</p>
+        </section>
+
     </main>
 
     <footer>
@@ -111,30 +118,125 @@
     </footer>
     </div>
 
+    <!-- Modal for project details -->
+    <div id="project-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-content" role="document">
+            <button class="modal-close" aria-label="Close modal" data-close>&times;</button>
+            <div class="modal-media" aria-hidden="true"></div>
+            <h3 class="modal-title"></h3>
+            <p class="modal-desc"></p>
+            <div class="modal-actions"></div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
     <script>
         (function(){
-            const filterButtons = document.querySelectorAll('.filter-button');
-            window.filterProjects = window.filterProjects || function(category){
-                if (typeof window.filterProjects === 'function') {
-                    try {
-                        window.filterProjectsOriginal && window.filterProjectsOriginal(category);
-                    } catch(e){}
-                }
-            };
+            // Filter projects
+            function filterProjects(category){
+                const cards = document.querySelectorAll('.project-card');
+                cards.forEach(card => {
+                    const cat = card.getAttribute('data-category');
+                    if (category === 'all' || cat === category) {
+                        card.classList.remove('hidden-card');
+                        card.setAttribute('aria-hidden', 'false');
+                    } else {
+                        card.classList.add('hidden-card');
+                        card.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+            window.filterProjects = filterProjects;
 
+            // Controls - filter buttons
             document.querySelectorAll('.projects-controls').forEach(ctrl => {
                 ctrl.addEventListener('click', (e) => {
                     const btn = e.target.closest('.filter-button');
                     if (!btn) return;
-                    filterButtons.forEach(b => b.classList.remove('active'));
+                    ctrl.querySelectorAll('.filter-button').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
-                    if (typeof window.filterProjects === 'function') {
-                        window.filterProjects(btn.textContent === 'ทั้งหมด' ? 'all' : btn.textContent === 'เว็บ' ? 'web' : btn.textContent === 'มือถือ' ? 'mobile' : 'data');
-                    }
+                    const category = btn.getAttribute('data-filter') || 'all';
+                    filterProjects(category);
                 });
             });
 
+            // Modal handling
+            const modal = document.getElementById('project-modal');
+            const modalTitle = modal.querySelector('.modal-title');
+            const modalDesc = modal.querySelector('.modal-desc');
+            const modalMedia = modal.querySelector('.modal-media');
+            const modalActions = modal.querySelector('.modal-actions');
+
+            function openModal(data){
+                modalTitle.textContent = data.title || '';
+                modalDesc.textContent = data.desc || '';
+                modalMedia.textContent = data.media || '';
+                modalActions.innerHTML = '';
+                if (data.link) {
+                    const a = document.createElement('a');
+                    a.href = data.link;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    a.className = 'btn btn-primary';
+                    a.textContent = 'เปิดโปรเจกต์';
+                    modalActions.appendChild(a);
+                }
+                if (data.source) {
+                    const s = document.createElement('a');
+                    s.href = data.source;
+                    s.target = '_blank';
+                    s.rel = 'noopener';
+                    s.className = 'btn btn-ghost';
+                    s.textContent = 'ซอร์สโค้ด';
+                    modalActions.appendChild(s);
+                }
+                modal.classList.add('open');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('no-scroll');
+                // focus for accessibility
+                modal.querySelector('.modal-close').focus();
+            }
+
+            function closeModal(){
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('no-scroll');
+            }
+
+            // Delegate detail & source button clicks
+            document.addEventListener('click', (e) => {
+                const detail = e.target.closest('.detail-btn');
+                if (detail) {
+                    openModal({
+                        title: detail.getAttribute('data-title'),
+                        desc: detail.getAttribute('data-desc'),
+                        media: detail.getAttribute('data-media'),
+                        link: detail.getAttribute('data-link'),
+                        source: detail.getAttribute('data-source')
+                    });
+                }
+                const source = e.target.closest('.source-btn');
+                if (source && !e.target.closest('.detail-btn')) {
+                    const src = source.getAttribute('data-source');
+                    if (src) window.open(src, '_blank', 'noopener');
+                }
+                if (e.target.closest('[data-close]')) {
+                    closeModal();
+                }
+            });
+
+            // keyboard ESC to close modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+            });
+
+            // Tooltip handling via data-tooltip attribute is done in CSS; ensure keyboard focus shows tooltip
+            document.querySelectorAll('[data-tooltip]').forEach(el => {
+                el.setAttribute('tabindex', '0');
+            });
+
+            // Hamburger menu (responsive)
             const hamburger = document.querySelector('.hamburger-menu');
             const navLinks = document.querySelector('.nav-links');
             if (hamburger && navLinks) {
@@ -147,6 +249,9 @@
                     if (navLinks.classList.contains('active')) toggleMenu();
                 }));
             }
+
+            // Initial state
+            filterProjects('all');
         })();
     </script>
 </body>
